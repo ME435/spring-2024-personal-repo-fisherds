@@ -1,0 +1,5 @@
+{
+    "sketch": "prep/Arduino/fake_plate_loader/fake_plate_loader.ino",
+    "board": "arduino:avr:uno",
+    "port": "/dev/tty.usbmodem2101"
+}
