@@ -1,5 +1,5 @@
 {
-    "sketch": "inclass/plateloader/fakeplateloader/fakeplateloader.ino",
+    "sketch": "section02/plateloader/fakeplateloader/fakeplateloader.ino",
     "board": "arduino:avr:uno",
     "port": "/dev/tty.usbmodem2101"
 }
