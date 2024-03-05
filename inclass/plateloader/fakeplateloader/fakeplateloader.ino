@@ -11,10 +11,21 @@ void loop() {
         // Do stuff with it!
         if (inputString.equals("RESET")) {
             Serial.println("READY, SAGIAN PE Loader, ROM...");
-        } if (inputString.startsWith("X-AXIS ")) {
+        } else if (inputString.startsWith("X-AXIS ")) {
+            Serial.println("READY");
+        } else if (inputString.startsWith("Z-AXIS ")) {
+            Serial.println("READY");
+        } else if (inputString.equals("GRIPPER OPEN")) {
+            Serial.println("READY, OPEN");
+        } else if (inputString.equals("GRIPPER CLOSE")) {
+            Serial.println("READY, CLOSED, NOPLATE");
+        } else if (inputString.equals("LOADER_STATUS")) {
+            Serial.println("READY, POSITION 3, Z-AXIS RETRACTED, GRIPPER CLOSED, NOPLATE");
+        } else if (inputString.startsWith("MOVE ")) {
+            delay(3000);
             Serial.println("READY");
         } else {
-            Serial.println("Unknown command!");
+            Serial.print("Unknown command!  ");
             Serial.println(inputString);
         }
 
