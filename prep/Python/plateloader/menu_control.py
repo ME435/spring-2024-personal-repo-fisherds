@@ -4,7 +4,6 @@ import time
 def main():
     ser = open_serial()
 
-
     while True:
         print("1: RESET")
         print("2: X-AXIS")
@@ -55,8 +54,8 @@ def wait_for_response(ser):
     print(f"Received --> {response}")
     return response
 
-# def open_serial(comPort="/dev/ttyAMA10"):
-def open_serial(comPort="/dev/tty.usbmodem2101"):
+def open_serial(comPort="/dev/ttyACM0"):
+# def open_serial(comPort="/dev/tty.usbmodem2101"):
     ser = serial.Serial(comPort, baudrate=19200)    
     while ser.is_open == False:
         time.sleep(0.1)
