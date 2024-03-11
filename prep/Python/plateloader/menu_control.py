@@ -55,8 +55,10 @@ def wait_for_response(ser):
     return response
 
 # For the Pi
-def open_serial(comPort="/dev/ttyACM0"):
-# def open_serial(comPort="/dev/tty.usbmodem2101"):
+# def open_serial(comPort="/dev/ttyACM0"):
+
+# For my Mac
+def open_serial(comPort="/dev/tty.usbmodem2101"):
     ser = serial.Serial(comPort, baudrate=19200)    
     while ser.is_open == False:
         time.sleep(0.1)
