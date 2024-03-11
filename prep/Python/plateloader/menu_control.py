@@ -54,6 +54,7 @@ def wait_for_response(ser):
     print(f"Received --> {response}")
     return response
 
+# For the Pi
 def open_serial(comPort="/dev/ttyACM0"):
 # def open_serial(comPort="/dev/tty.usbmodem2101"):
     ser = serial.Serial(comPort, baudrate=19200)    
