@@ -4,6 +4,7 @@ import time
 def main():
     ser = open_serial()
 
+
     while True:
         print("1: RESET")
         print("2: X-AXIS")
