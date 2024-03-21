@@ -5,11 +5,13 @@ import time
 
 
 app = Flask(__name__)
+print("Start the server, don't do serial connection yet!")
 
+# This was great to --debug mode on for web app.
 
-@app.before_first_request
-def setup_serial():
-    app.ser = open_serial()
+# @app.before_first_request
+# def setup_serial():
+#     app.ser = open_serial()
 
 
 @app.route("/")
@@ -61,3 +63,6 @@ def open_serial(name="/dev/ttyACM0"):
     ser.reset_input_buffer()  # optional
     return ser
 
+
+# Connect on startup.  Has issues with --debug
+app.ser = open_serial()

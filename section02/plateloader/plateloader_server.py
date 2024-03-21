@@ -5,7 +5,6 @@ import time
 
 app = Flask(__name__)
 
-
 @app.before_first_request
 def setup_serial():
     app.ser = open_serial()
