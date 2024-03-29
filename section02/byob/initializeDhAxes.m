@@ -3,7 +3,7 @@ function initializeDhAxes
 % Begin: Setup for this stand alone version that will NOT go into the GUI.
 close all
 app.axes_arm = axes;  % Create a new axes and save a handle to it.
-app.jointAngles = [45 45 90]; % Start at the zero angle position.
+app.jointAngles = [20 45 90]; % Start at the zero angle position.
 %  End : Setup for this stand alone version that will NOT go into the GUI.
 
 
@@ -45,7 +45,6 @@ function updateArm(app)
 
 % Create the A homogeneous transformation matrices for the given jointAngles.
 [A1, A2, A3] = create_AdeeptArm_A_matrices(app.jointAngles);
-
 
 % Use the current A matricies to form the T0_n matricies.
 T0_1 = A1;
