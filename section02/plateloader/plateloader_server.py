@@ -4,20 +4,21 @@ import serial
 import time
 
 app = Flask(__name__)
+# print("Note: The Serial connect doesn't happen until the first request")
 
-@app.before_first_request
-def setup_serial():
-    app.ser = open_serial()
+# @app.before_first_request
+# def setup_serial():
+#     app.ser = open_serial()
 
 
 @app.route("/")
 def mainpage():
     return render_template("index.html")
 
+
 @app.route("/hello/<name>")
 def hello_route(name):
     return f"Hello, {name}! Thanks for visiting!"
-
 
 
 @app.route("/api/<command>")
@@ -55,3 +56,7 @@ def wait_for_response(ser):
     while ser.in_waiting == 0:
         time.sleep(0.1)
     return print_response(ser)
+
+# Better: Connects to the serial object right away!
+# Worse: does not play nicely with --debug
+app.ser = open_serial()
