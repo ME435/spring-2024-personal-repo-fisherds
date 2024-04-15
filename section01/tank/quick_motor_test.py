@@ -115,7 +115,7 @@ def main():
     left_motor_backwards_pin.on()
     left_motor_pwm_enable.value = 1.0
 
-    time.sleep(3)
+    time.sleep(8)
 
     right_motor_forwards_pin.off()
     right_motor_backwards_pin.off()
