@@ -4,7 +4,6 @@ import time
 class Motor:
 
     def __init__(self, forwards_gpio, backwards_gpio, enable_gpio):
-        print("Create a Motor")
         self.forwards_pin = gz.DigitalOutputDevice(forwards_gpio)
         self.backwards_pin = gz.DigitalOutputDevice(backwards_gpio)
         self.pwm_enable = gz.PWMOutputDevice(enable_gpio)
