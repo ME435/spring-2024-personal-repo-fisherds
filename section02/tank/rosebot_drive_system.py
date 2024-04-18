@@ -4,7 +4,7 @@ import time
 class DriveSystem:
 
     def __init__(self):
-        Motor_A_EN = 4
+        Motor_A_EN = 1 # was a 4
         Motor_B_EN = 17
         Motor_A_Pin1 = 14
         Motor_A_Pin2 = 15
