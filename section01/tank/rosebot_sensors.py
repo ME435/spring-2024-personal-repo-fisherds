@@ -34,7 +34,9 @@ class LineSensors:
         return "W"
     
     def get_middle(self):
-        return self.middle_sensor.value
+        if self.middle_sensor.value == 1:
+            return "B"
+        return "W"
     
     def get_right(self):
         if self.right_sensor.value == 1:
