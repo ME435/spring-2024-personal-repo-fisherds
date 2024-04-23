@@ -1,10 +1,6 @@
 import mqtt_helper as mh
 import time
-# import os
-# os.environ['GPIOZERO_PIN_FACTORY'] = os.environ.get('GPIOZERO_PIN_FACTORY', 'mock')
 import gpiozero as gz
-
-# gz.Device._default_pin_factory()
 
 class App:
 
