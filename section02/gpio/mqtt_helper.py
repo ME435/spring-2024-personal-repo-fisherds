@@ -9,8 +9,8 @@ class MqttClient(object):
   """Helper class to make it easier to work with MQTT subscriptions and publications."""
 
   def __init__(self):
-    self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1) # For newer paho-mqtt version use this
-    # self.client = mqtt.Client() # For older paho-mqtt versions use this
+    # self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1) # For newer paho-mqtt version use this
+    self.client = mqtt.Client() # For older paho-mqtt versions use this
     self.subscription_topic_name = None
     self.publish_topic_name = None
     self.callback = None
