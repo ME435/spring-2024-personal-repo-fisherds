@@ -1,0 +1,17 @@
+function hackyMqttTest()
+clc
+mqClient = mqttclient("tcp://broker.hivemq.com");
+mqClient.subscribe("fisherds", "Callback", @myCallback);
+% mqClient.Connected
+
+for k = 1:3
+    pause(1)
+    write(mqClient, "fisherds", )
+end
+
+end
+
+function myCallback(topic, message)
+    topic
+    message
+end
