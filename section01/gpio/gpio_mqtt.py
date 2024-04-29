@@ -29,17 +29,52 @@ class App:
             if payload == "off":
                 self.red_led.off()
 
+        if message_type == "yellow":
+            if payload == 1:
+                self.yellow_led.on()
+            if payload == 0:
+                self.yellow_led.off()
+
+        if message_type == "green":
+            if payload:
+                self.green_led.on()
+            if not payload:
+                self.green_led.off()
+
+        if message_type == "leds":
+            if payload[0] == 1:
+                self.red_led.on()
+            if payload[0] == 0:
+                self.red_led.off()
+            if payload[1] == 1:
+                self.yellow_led.on()
+            if payload[1] == 0:
+                self.yellow_led.off()
+            if payload[2] == 1:
+                self.green_led.on()
+            if payload[2] == 0:
+                self.green_led.off()
+
 def main():
     print("GPIO MQTT")
     app = App()
 
     # counter = 0
     while True:
-        time.sleep(2.0)
         # counter += 1
         # app.mqtt_client.send_message("number", counter)
+
+        time.sleep(2.0)
         app.mqtt_client.send_message("red", "on")
+        app.mqtt_client.send_message("yellow", 1)
+        app.mqtt_client.send_message("green", True)
         time.sleep(2.0)
         app.mqtt_client.send_message("red", "off")
+        app.mqtt_client.send_message("yellow", 0)
+        app.mqtt_client.send_message("green", False)
+        time.sleep(2.0)
+        app.mqtt_client.send_message("leds", [1, 0, 1])
+        time.sleep(2.0)
+        app.mqtt_client.send_message("leds", [0, 1, 0])
 
 main()
