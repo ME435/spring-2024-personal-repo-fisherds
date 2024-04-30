@@ -13,8 +13,8 @@ class App:
 
 
         self.mqtt_client = mh.MqttClient()
-        self.mqtt_client.connect(subscription_topic_name="fisherds",
-                            publish_topic_name="fisherds",
+        self.mqtt_client.connect(subscription_topic_name="fisherds/to_pi",
+                            publish_topic_name="fisherds/to_comp",
                             use_off_campus_broker=True)
         self.mqtt_client.callback = self.mqtt_callback
 
