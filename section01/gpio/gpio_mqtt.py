@@ -7,21 +7,24 @@ class App:
     def __init__(self):
         print("Setup MQTT and other stuff")
         self.mqtt_client = mh.MqttClient()
-        self.mqtt_client.connect(subscription_topic_name="fisherds",
-                            publish_topic_name="fisherds",
-                            use_off_campus_broker=False)
+        self.mqtt_client.connect(subscription_topic_name="fisherds/to_pi",
+                            publish_topic_name="fisherds/to_comp",
+                            use_off_campus_broker=True)
         self.mqtt_client.callback = self.mqtt_callback
 
         # Get out of the virtual environment to use gpiozero
-        self.red_led = gz.LED(14)
-        self.yellow_led = gz.LED(15)
-        self.green_led = gz.LED(18)
+        self.red_led = gz.LED(14)   # 17 on a tank
+        self.yellow_led = gz.LED(15)  # 18
+        self.green_led = gz.LED(18) # 27
         
+        self.button25 = gz.Button(25)
+        self.button25.when_pressed = lambda : self.mqtt_client.send_message("button")
+        self.button23 = gz.Button(23)
+        self.button23.when_pressed = lambda : self.mqtt_client.send_message("reset")
 
     def mqtt_callback(self, message_type, payload):
         print("Type:", message_type)
         print("Payload:", payload)
-        # TODO: Actually do something with the message!
 
         if message_type == "red":
             if payload == "on":
@@ -64,17 +67,19 @@ def main():
         # counter += 1
         # app.mqtt_client.send_message("number", counter)
 
-        time.sleep(2.0)
-        app.mqtt_client.send_message("red", "on")
-        app.mqtt_client.send_message("yellow", 1)
-        app.mqtt_client.send_message("green", True)
-        time.sleep(2.0)
-        app.mqtt_client.send_message("red", "off")
-        app.mqtt_client.send_message("yellow", 0)
-        app.mqtt_client.send_message("green", False)
-        time.sleep(2.0)
-        app.mqtt_client.send_message("leds", [1, 0, 1])
-        time.sleep(2.0)
-        app.mqtt_client.send_message("leds", [0, 1, 0])
+        time.sleep(0.1)
+
+        # time.sleep(2.0)
+        # app.mqtt_client.send_message("red", "on")
+        # app.mqtt_client.send_message("yellow", 1)
+        # app.mqtt_client.send_message("green", True)
+        # time.sleep(2.0)
+        # app.mqtt_client.send_message("red", "off")
+        # app.mqtt_client.send_message("yellow", 0)
+        # app.mqtt_client.send_message("green", False)
+        # time.sleep(2.0)
+        # app.mqtt_client.send_message("leds", [1, 0, 1])
+        # time.sleep(2.0)
+        # app.mqtt_client.send_message("leds", [0, 1, 0])
 
 main()
