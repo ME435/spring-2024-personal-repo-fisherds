@@ -24,7 +24,10 @@ class App:
         if message_type == "is_streaming_line_sensors":
             self.is_streaming_line_sensors = payload
 
-
+        if message_type == "drive":
+            left_speed = payload[0]
+            right_speed = payload[1]
+            self.robot.drive_system.go(left_speed, right_speed)
 
 def main():
     print("RaspTank")
