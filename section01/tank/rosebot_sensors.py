@@ -42,7 +42,11 @@ class LineSensors:
         if self.right_sensor.value == 1:
             return "B"
         return "W"
-
+    
+    def is_line(self):
+        return (self.get_left() == "B" or 
+                self.get_middle() == "B" or 
+                self.get_right() == "B")
 
 
 def main():

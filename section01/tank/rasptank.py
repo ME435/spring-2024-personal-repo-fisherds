@@ -16,6 +16,9 @@ class App:
 
         self.robot = rosebot.RoseBot()
         self.is_streaming_line_sensors = False
+        self.is_driving_until_wall = False
+        self.is_driving_until_line = False
+        self.is_line_following = False
 
     def mqtt_callback(self, message_type, payload):
         print("Type:", message_type)
@@ -28,6 +31,16 @@ class App:
             left_speed = payload[0]
             right_speed = payload[1]
             self.robot.drive_system.go(left_speed, right_speed)
+        
+        if message_type == "mode":
+            if payload == "drive_until_wall":
+                self.is_driving_until_wall = True
+                self.robot.drive_system.go(70, 70)
+        
+        if message_type == "mode":
+            if payload == "drive_until_line":
+                self.is_driving_until_line = True
+                self.robot.drive_system.go(70, 70)
 
 def main():
     print("RaspTank")
@@ -41,6 +54,16 @@ def main():
 
     while True:
         time.sleep(0.1)
+        
+        if app.is_driving_until_wall:
+            if app.robot.ultrasonic.get() < 0.2:
+                app.robot.drive_system.stop()
+                app.is_driving_until_wall = False
+        
+        if app.is_driving_until_line:
+            if app.robot.line_sensors.is_line():
+                app.robot.drive_system.stop()
+                app.is_driving_until_line = False
 
         if app.is_streaming_line_sensors:
             now = datetime.datetime.now() # current date and time
