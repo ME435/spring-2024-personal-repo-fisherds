@@ -17,6 +17,9 @@ class App:
 
         self.robot = rosebot.RoseBot()
         self.is_streaming = False
+        self.drive_until_wall = False
+        self.drive_until_line = False
+        self.is_line_following = False
 
 
     def mqtt_callback(self, message_type, payload):
@@ -25,6 +28,14 @@ class App:
         
         if message_type == "is_streaming":
             self.is_streaming = payload
+            
+        if message_type == "drive":
+            self.robot.drive_system.go(payload[0], payload[1])
+            
+        if message_type == "mode":
+            if payload == "drive_until_wall":
+                self.drive_until_wall = True
+                self.robot.drive_system.go(90, 90)            
 
                 
 def main():
@@ -39,6 +50,11 @@ def main():
     
     while True:
         time.sleep(0.1)
+        
+        if app.drive_until_wall:
+            if app.robot.ultrasonic.get_distance() < 0.2:
+                app.robot.drive_system.stop()
+                app.drive_until_wall = False
         
         now = datetime.datetime.now() # current date and time
         date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
