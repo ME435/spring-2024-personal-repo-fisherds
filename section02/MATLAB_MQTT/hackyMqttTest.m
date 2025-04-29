@@ -2,7 +2,8 @@ function hackyMqttTest()
 clc
 fprintf("Hacky MQTT Test in MATLAB\n")
 
-mqClient = mqttclient("tcp://broker.hivemq.com");
+% mqClient = mqttclient("tcp://broker.hivemq.com");
+mqClient = mqttclient("tcp://test.mosquitto.org");
 
 % mqClient.Connected
 mqClient.subscribe("fisherds", "Callback", @myCallback)
